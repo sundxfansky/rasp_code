@@ -73,4 +73,4 @@ while True:
     except OSError as e:
         print("os error ,didn't get data")
 
-    time.sleep(0.5)
+    time.sleep(0.02)
