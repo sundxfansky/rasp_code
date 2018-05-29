@@ -1,27 +1,36 @@
+#!/usr/bin/python3
+# coding=utf-8
+# author：sundxfansky@sjtu.edu.cn
+
+# 时序测试程序
 import time
+
+
 def delay(i):
-    k=0
+    k = 0
     for j in range(i):
-        k+=1
-n=5000
-j=0
- 
-a=time.time()
-i=1
-c=time.time()
-d=c-a
+        k += 1
+
+
+n = 5000
+j = 0
+
+a = time.time()
+i = 1
+c = time.time()
+d = c - a
 print(d)
 print(d*5000)
- 
-a=time.time()
+
+a = time.time()
 for i in range(n):
-    j+=1
-c=time.time()
-d=c-a
+    j += 1
+c = time.time()
+d = c - a
 print(d)
- 
-a=time.time()
+
+a = time.time()
 delay(n)
-c=time.time()
-d=c-a
+c = time.time()
+d = c - a
 print(d)

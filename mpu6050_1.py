@@ -1,5 +1,6 @@
 import smbus
 
+
 class mpu6050:
 
     # Global Variables
@@ -95,7 +96,7 @@ class mpu6050:
         # Write the new range to the ACCEL_CONFIG register
         self.bus.write_byte_data(self.address, self.ACCEL_CONFIG, accel_range)
 
-    def read_accel_range(self, raw = False):
+    def read_accel_range(self, raw=False):
         """Reads the range the accelerometer is set to.
         If raw is True, it will return the raw value from the ACCEL_CONFIG
         register
@@ -118,7 +119,7 @@ class mpu6050:
             else:
                 return -1
 
-    def get_accel_data(self, g = False):
+    def get_accel_data(self, g=False):
         """Gets and returns the X, Y and Z values from the accelerometer.
         If g is True, it will return the data in g
         If g is False, it will return the data in m/s^2
@@ -140,7 +141,8 @@ class mpu6050:
         elif accel_range == self.ACCEL_RANGE_16G:
             accel_scale_modifier = self.ACCEL_SCALE_MODIFIER_16G
         else:
-            print("Unkown range - accel_scale_modifier set to self.ACCEL_SCALE_MODIFIER_2G")
+            print(
+                "Unkown range - accel_scale_modifier set to self.ACCEL_SCALE_MODIFIER_2G")
             accel_scale_modifier = self.ACCEL_SCALE_MODIFIER_2G
 
         x = x / accel_scale_modifier
@@ -166,7 +168,7 @@ class mpu6050:
         # Write the new range to the ACCEL_CONFIG register
         self.bus.write_byte_data(self.address, self.GYRO_CONFIG, gyro_range)
 
-    def read_gyro_range(self, raw = False):
+    def read_gyro_range(self, raw=False):
         """Reads the range the gyroscope is set to.
         If raw is True, it will return the raw value from the GYRO_CONFIG
         register.
@@ -209,7 +211,8 @@ class mpu6050:
         elif gyro_range == self.GYRO_RANGE_2000DEG:
             gyro_scale_modifier = self.GYRO_SCALE_MODIFIER_2000DEG
         else:
-            print("Unkown range - gyro_scale_modifier set to self.GYRO_SCALE_MODIFIER_250DEG")
+            print(
+                "Unkown range - gyro_scale_modifier set to self.GYRO_SCALE_MODIFIER_250DEG")
             gyro_scale_modifier = self.GYRO_SCALE_MODIFIER_250DEG
 
         x = x / gyro_scale_modifier
@@ -225,6 +228,7 @@ class mpu6050:
         gyro = self.get_gyro_data()
 
         return [accel, gyro, temp]
+
 
 if __name__ == "__main__":
     mpu = mpu6050(0x68)
