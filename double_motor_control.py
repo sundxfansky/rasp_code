@@ -1,64 +1,113 @@
 import RPi.GPIO as gpio
 import time, sys
-gpio.setmode(gpio.BOARD)
 #pwm
+gpio.setmode(gpio.BOARD)
 motor_a = 18 
 motor_b = 32
 #Speed ​​feedback
-motor_a_sc = 16 
-motor_b_sc = 22 
-# 2 relay model
-relay_IN1 = 38
-relay_IN2 = 36
-#raindrop_model 
-raindrop_model_do = 7
-#ultrasonic detection Module
-sonic_a_trig = 11
-sonic_b_trig = 29
-sonic_a_echo = 13
-sonic_b_echo = 31 
 #2relaymodel
-swith1 = 36
-swith2 = 38
+switch1 = 36
+switch2 = 38
 
-gpio.setup(swith1,gpio.OUT,initial = gpio.LOW)
+gpio.setup(switch1,gpio.OUT,initial = gpio.HIGH)
+gpio.setup(switch2, gpio.OUT, initial=gpio.HIGH)
 #gpio.setup(swith2,gpio.OUT,initial = gpio.LOW)
 
-def turn_RIGHT_motor():
-    print("RIGHT....")
-    time.sleep(2)
-    gpio.output(swith1,gpio.HIGH)
-    #gpio.output(swith2,gpio.HIGH)
+def turn_on_motor():
+    print("Turn on motor....")
+    time.sleep(1)
+    gpio.output(switch1,gpio.LOW)
+    #gpio.output(switch2,gpio.HIGH)
     print("sucessful opened") 
 
-def turn_LEFT_motor():
-    print("turning LEFT....")
-    time.sleep(2)
-    gpio.output(swith1,gpio.LOW)
-    #gpio.output(swith2,gpio.LOW)
 
-gpio.setmode(gpio.BOARD)
+def turn_off_motor():
+    print("Turn off motor....")
+    gpio.output(switch1, gpio.HIGH)
+    time.sleep(0.5)
+    #gpio.output(switch2,gpio.HIGH)
+    print("sucessful closed")
+#shun
+def turn_back_motor():
+    print("turning LEFT....")
+    time.sleep(0.5)
+    gpio.output(switch2,gpio.HIGH)
+    #gpio.output(switch2,gpio.LOW)
+
+#nishizhen
+def turn_forward_motor():
+    print("turning RIGHT....")
+    time.sleep(0.5)
+    gpio.output(switch2, gpio.LOW)
+    #gpio.output(switch2,gpio.LOW)
+
 gpio.setup(motor_a, gpio.OUT)
 gpio.setup(motor_b, gpio.OUT)
 #turn_on_motor()
-turn_RIGHT_motor()
+
+n=35
+time1=10
+time2=7
+turn_on_motor()
+turn_forward_motor()
 #频率设置为400Hz
 motor_a_pwm = gpio.PWM(motor_a , 400)
 motor_b_pwm = gpio.PWM(motor_b , 400)
-motor_a_pwm.start(10)
-motor_b_pwm.start(10)
-time.sleep(2)
-motor_a_pwm.ChangeDutyCycle(20)
-motor_b_pwm.ChangeDutyCycle(20)
-time.sleep(2)
+motor_a_pwm.start(n)
+motor_b_pwm.start(n)
+time.sleep(time1)
 motor_a_pwm.stop()
 motor_b_pwm.stop()
+turn_off_motor()
+print(" stay...")
 
-turn_LEFT_motor()
-motor_a_pwm.start(10)
-motor_b_pwm.start(10)
-time.sleep(2)
+time.sleep(1)
+turn_on_motor()
+turn_back_motor()
+motor_a_pwm = gpio.PWM(motor_a, 400)
+motor_b_pwm = gpio.PWM(motor_b, 400)
+motor_a_pwm.start(n)
+motor_b_pwm.start(n)
+time.sleep(time2)
 motor_a_pwm.stop()
 motor_b_pwm.stop()
+turn_off_motor()
+
+#频率设置为400Hz
+turn_on_motor()
+turn_forward_motor()
+motor_a_pwm = gpio.PWM(motor_a, 400)
+motor_b_pwm = gpio.PWM(motor_b, 400)
+motor_a_pwm.start(n)
+motor_b_pwm.start(n)
+time.sleep(time2)
+motor_a_pwm.stop()
+motor_b_pwm.stop()
+turn_off_motor()
+print(" stay...")
+
+time.sleep(1)
+turn_on_motor()
+turn_back_motor()
+motor_a_pwm = gpio.PWM(motor_a, 400)
+motor_b_pwm = gpio.PWM(motor_b, 400)
+motor_a_pwm.start(n)
+motor_b_pwm.start(n)
+time.sleep(time2)
+motor_a_pwm.stop()
+motor_b_pwm.stop()
+turn_off_motor()
+
+
+
+
+
+
+# turn_LEFT_motor()
+# motor_a_pwm.start(10)
+# motor_b_pwm.start(10)
+# time.sleep(2)
+# motor_a_pwm.stop()
+# motor_b_pwm.stop()
 
 gpio.cleanup()

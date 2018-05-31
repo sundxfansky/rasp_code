@@ -18,24 +18,24 @@
 #初始化开关
 def switch_init(switch1 = 36,switch2 = 38):
     print("Switch initializing......")
-    gpio.setup(switch1, gpio.OUT, initial = gpio.LOW)
-    gpio.setup(switch2, gpio.OUT, initial = gpio.LOW)
+    gpio.setup(switch1, gpio.OUT, initial = gpio.HIGH)
+    gpio.setup(switch2, gpio.OUT, initial = gpio.HIGH)
     print("Switch initialized")
 
 #开启驱动版
 def open_drive_board(switch = 36):
     print("Opening drive board......")
-    gpio.output(switch,gpio.HIGH)
+    gpio.output(switch,gpio.LOW)
     print("Opened drive board")
 
 #向前走
 def change_move_forward(switch = 38):
     print("Changing move forward.....")
-    gpio.output(switch,gpio.HIGH)
+    gpio.output(switch,gpio.LOW)
     print("changed move forward")
 
 #向后走
 def change_move_back(switch = 38):
     print("Changing move back.....")
-    gpio.output(switch,gpio.LOW)
+    gpio.output(switch,gpio.HIGH)
     print("changed move back")

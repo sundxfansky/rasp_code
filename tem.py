@@ -3,7 +3,7 @@
 # author：sundxfansky@sjtu.edu.cn
 # 温湿度获取程序
 
-import commands
+#import commands
 import web_weather
 import threading
 

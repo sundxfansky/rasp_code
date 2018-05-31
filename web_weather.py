@@ -109,4 +109,4 @@ if __name__ == '__main__':
         print("==========开始工作==========")
         getweather()
         print("【休息中……】")
-        time.sleep(2)
+        time.sleep(60)
